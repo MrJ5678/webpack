@@ -1,13 +1,13 @@
-require("@babel/polyfill")
+// require("@babel/polyfill")
 
-class B {
+// class B {
   
-}
+// }
 
-function* gen(params) {
-  yield 1;
-}
+// function* gen(params) {
+//   yield 1;
+// }
 
-console.log(gen().next());
+// console.log(gen().next());
 
-console.log("aaa".includes('a'));
+// console.log("aaa".includes('a'));

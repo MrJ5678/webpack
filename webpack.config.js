@@ -3,6 +3,8 @@ const HtmlWebpaclPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const webpack = require('webpack');
+const WebpackDevServer = require("webpack-dev-server");
 
 module.exports = {
   mode: "production",
@@ -30,8 +32,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "main.css",
       // chunkFilename: '[id].css',
+    }),
+    new webpack.ProvidePlugin({ // 在每个模块中都注入$
+      $: 'jquery'
     })
   ],
+  externals: {
+    jquery: '$'
+  },
   module: { // loader 默认从右向左,从下到上执行
     rules: [
       {
@@ -96,7 +104,18 @@ module.exports = {
             ]
           }
         }
-      }
+      },
+      // {
+      //   test: require.resolve('jquery'),
+      //   use: [
+      //     {
+      //       loader: 'expose-loader',
+      //       options: {
+      //         exposes: ['$', 'jQuery'],
+      //       },
+      //     },
+      //   ]
+      // },
     ],
   },
   optimization: {
