@@ -1,1 +1,8 @@
-@import './a.css';
+div {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  color: red;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-image: url('image1.jpg');
+}

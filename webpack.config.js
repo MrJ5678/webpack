@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require("webpack-dev-server");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: "./src/index.js",
   output: {
     filename: "bundle-[hash:8].js",
@@ -33,9 +33,9 @@ module.exports = {
       filename: "main.css",
       // chunkFilename: '[id].css',
     }),
-    new webpack.ProvidePlugin({ // 在每个模块中都注入$
-      $: 'jquery'
-    })
+    // new webpack.ProvidePlugin({ // 在每个模块中都注入$
+    //   $: 'jquery'
+    // })
   ],
   externals: {
     jquery: '$'
@@ -116,6 +116,21 @@ module.exports = {
       //     },
       //   ]
       // },
+      {
+        test: /\.(jpg|png|jpeg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          // 当图片大小 小于一个值时, 用base64格式转化图片
+          options: {
+            limit: 1,
+            esModule: false,
+          }
+        }
+      },
+      {
+        test: /\.html$/,
+        use: 'html-withimg-loader'
+      }
     ],
   },
   optimization: {
@@ -125,7 +140,7 @@ module.exports = {
       //   parallel: true,
       //   sourceMap: true // set to true if you want JS source maps
       // }),
-      new OptimizeCSSAssetsPlugin({})
+      // new OptimizeCSSAssetsPlugin({})
     ]
   },
 };
