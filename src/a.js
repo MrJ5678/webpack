@@ -1,3 +1,5 @@
+require("@babel/polyfill")
+
 class B {
   
 }
@@ -7,3 +9,5 @@ function* gen(params) {
 }
 
 console.log(gen().next());
+
+console.log("aaa".includes('a'));

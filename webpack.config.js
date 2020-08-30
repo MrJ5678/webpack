@@ -32,7 +32,7 @@ module.exports = {
       // chunkFilename: '[id].css',
     })
   ],
-  module: {
+  module: { // loader 默认从右向左,从下到上执行
     rules: [
       {
         test: /\.css$/,
@@ -69,8 +69,20 @@ module.exports = {
           "less-loader"
         ],
       },
+      // {
+      //   test: /.js$/,
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       enforce: 'pre'
+      //     }
+      //   },
+      //   exclude: /node_modules/
+      // },
       {
-        test: /\.js$/,
+        test: /\.js$/, // normal loader
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'src'),
         use: {
           loader: 'babel-loader',
           options: { // 用babel-loader 将es6转换为es5
@@ -79,7 +91,8 @@ module.exports = {
             ],
             plugins: [
               ['@babel/plugin-proposal-decorators', {"legacy": true}],
-              ['@babel/plugin-proposal-class-properties', {"loose": true}]
+              ['@babel/plugin-proposal-class-properties', {"loose": true}],
+              "@babel/plugin-transform-runtime"
             ]
           }
         }
