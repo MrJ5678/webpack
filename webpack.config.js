@@ -69,15 +69,30 @@ module.exports = {
           "less-loader"
         ],
       },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: { // 用babel-loader 将es6转换为es5
+            presets: [
+              '@babel/preset-env'
+            ],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', {"legacy": true}],
+              ['@babel/plugin-proposal-class-properties', {"loose": true}]
+            ]
+          }
+        }
+      }
     ],
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
+      // new UglifyJsPlugin({
+      //   cache: true,
+      //   parallel: true,
+      //   sourceMap: true // set to true if you want JS source maps
+      // }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },

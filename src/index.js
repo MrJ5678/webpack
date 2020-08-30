@@ -1,5 +1,25 @@
-console.log('object12');
+console.log("object12");
 
-require('./index.css')
+require("./a.js")
 
-require('./index.less')
+require("./index.css");
+
+require("./index.less");
+
+let fn = () => {
+  console.log("箭头函数");
+};
+
+fn();
+
+@log
+class A {
+  a = 1
+}
+
+let a = new A()
+console.log(a);
+
+function log(target) {
+  console.log(target);
+}
