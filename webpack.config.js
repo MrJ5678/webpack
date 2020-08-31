@@ -12,13 +12,14 @@ module.exports = {
   output: {
     filename: "bundle-[hash:8].js",
     path: path.resolve(__dirname, "dist"),
+    // publicPath: 'localhost:8080/'
   },
-  // devServer: {
-  //   port: 3000,
-  //   progress: true,
-  //   contentBase: "./dist",
-  //   compress: true,
-  // },
+  devServer: {
+    // port: 3000,
+    progress: true,
+    contentBase: "./dist",
+    compress: true,
+  },
   plugins: [
     new HtmlWebpaclPlugin({
       template: "./src/index.html",
@@ -30,7 +31,7 @@ module.exports = {
       // hash: true,
     }),
     new MiniCssExtractPlugin({
-      filename: "main.css",
+      filename: "css/main.css",
       // chunkFilename: '[id].css',
     }),
     // new webpack.ProvidePlugin({ // 在每个模块中都注入$
@@ -71,7 +72,12 @@ module.exports = {
         test: /\.less$/,
         use: [
           // { loader: "style-loader" }, 
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           "css-loader",
           "postcss-loader", 
           "less-loader"
@@ -124,6 +130,8 @@ module.exports = {
           options: {
             limit: 1,
             esModule: false,
+            outputPath: 'img',
+            publicPath: '/img'
           }
         }
       },
